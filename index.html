@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パスポートの作り方 | Passport Guide for Teens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --muji-red: #7f0019;
+            --muji-beige: #f7f3f0;
+            --muji-gray: #333333;
+            --muji-silver: #e0e0e0;
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--muji-beige);
+            color: var(--muji-gray);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        .step-node {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .step-node:hover {
+            transform: scale(1.1);
+        }
+        .step-active {
+            border-color: var(--muji-red) !important;
+            color: var(--muji-red) !important;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(127, 0, 25, 0.1);
+            background-color: #ffffff !important;
+        }
+        .progress-line {
+            transition: width 0.8s ease-in-out;
+        }
+        /* コンテンツの切り替えアニメーション */
+        .step-content-view {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .info-box {
+            background-color: #ffffff;
+            border: 1px solid var(--muji-silver);
+            border-radius: 2px;
+        }
+        .active-view {
+            display: block !important;
+        }
+    </style>
+</head>
+<body class="py-12 px-4 md:px-8">
+    <div class="max-w-2xl mx-auto">
+        
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-2xl font-medium tracking-[0.2em] mb-4">パスポート申請ガイド</h1>
+            <p class="text-xs text-gray-400 tracking-widest uppercase">For Under 18 - Step by Step</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="relative mb-16 px-4">
+            <div class="h-[1px] w-full bg-gray-300 absolute top-1/2 left-0 -translate-y-1/2"></div>
+            <div id="progressBar" class="h-[1px] bg-[#7f0019] absolute top-1/2 left-0 -translate-y-1/2 progress-line" style="width: 0%"></div>
+            
+            <div class="relative flex justify-between">
+                <div onclick="showStep(1)" class="step-node w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center z-10 text-xs" id="node1">1</div>
+                <div onclick="showStep(2)" class="step-node w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center z-10 text-xs" id="node2">2</div>
+                <div onclick="showStep(3)" class="step-node w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center z-10 text-xs" id="node3">3</div>
+                <div onclick="showStep(4)" class="step-node w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center z-10 text-xs" id="node4">4</div>
+                <div onclick="showStep(5)" class="step-node w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center z-10 text-xs" id="node5">🏁</div>
+            </div>
+        </div>
+
+        <!-- Dynamic Content Area -->
+        <div id="stepContent" class="min-h-[500px]">
+            
+            <!-- Welcome View (Initial screen) -->
+            <div id="welcome" class="step-content-view text-center py-24 info-box shadow-sm active-view">
+                <div class="text-5xl mb-8 opacity-20">🌏</div>
+                <h3 class="text-base font-medium mb-2 tracking-widest">はじめてのパスポート</h3>
+                <p class="text-[11px] text-gray-400 mb-8 tracking-widest">18歳未満の方のための、やさしい手続き案内。</p>
+                <button onclick="showStep(1)" class="px-10 py-3 bg-[#7f0019] text-white text-[10px] tracking-[0.3em] font-medium hover:opacity-90 transition uppercase">Start Guide</button>
+            </div>
+
+            <!-- Step 1: Documents -->
+            <div id="step1" class="step-content-view">
+                <div class="info-box p-8 md:p-10">
+                    <span class="text-[10px] font-bold text-[#7f0019] tracking-widest">STEP 01</span>
+                    <h3 class="text-lg font-medium mt-2 mb-8">書類をあつめる</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <input type="checkbox" class="mt-1.5 w-4 h-4 accent-[#7f0019]">
+                            <div>
+                                <p class="text-sm font-medium">戸籍謄本</p>
+                                <p class="text-[11px] text-gray-400 mt-1">本籍地の役所で「全部事項証明書」を1通。発行から6ヶ月以内のもの。</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-100 pt-6">
+                            <p class="text-xs font-bold mb-4 text-gray-400 tracking-widest">身分証明書の組み合わせ</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-gray-50 rounded-sm">
+                                    <p class="text-[10px] font-bold text-gray-500 mb-1">【1枚でOK】</p>
+                                    <p class="text-[11px] leading-relaxed italic">マイナンバーカード<br>運転免許証</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-sm">
+                                    <p class="text-[10px] font-bold text-gray-500 mb-1">【2枚必要】</p>
+                                    <p class="text-[11px] leading-relaxed italic">健康保険証<br>＋ 学生証（写真付）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showStep(2)" class="mt-12 w-full py-4 border border-gray-200 text-[10px] tracking-[0.2em] font-medium hover:bg-gray-50 transition uppercase">Go to Next Step</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Photos -->
+            <div id="step2" class="step-content-view">
+                <div class="info-box p-8 md:p-10">
+                    <span class="text-[10px] font-bold text-[#7f0019] tracking-widest">STEP 02</span>
+                    <h3 class="text-lg font-medium mt-2 mb-8">写真を撮る</h3>
+                    
+                    <div class="bg-gray-50 p-6 mb-8 rounded-sm">
+                        <p class="text-xs font-bold text-gray-400 mb-4 tracking-tighter">規格：タテ45mm × ヨコ35mm</p>
+                        <ul class="text-[11px] space-y-3 text-gray-500">
+                            <li class="flex items-center"><span class="text-red-800 mr-2">×</span> 前髪が目にかかっている</li>
+                            <li class="flex items-center"><span class="text-red-800 mr-2">×</span> メガネが光っている</li>
+                            <li class="flex items-center"><span class="text-red-800 mr-2">×</span> カラーコンタクト（サークルレンズ含む）</li>
+                            <li class="flex items-center"><span class="text-red-800 mr-2">×</span> 背景に影や物がある</li>
+                        </ul>
+                    </div>
+                    
+                    <p class="text-[10px] text-gray-400 leading-relaxed italic mb-8">
+                        ※パスポートセンターにある「専用の証明写真コーナー」で撮るのが一番間違いありません。
+                    </p>
+                    
+                    <button onclick="showStep(3)" class="w-full py-4 border border-gray-200 text-[10px] tracking-[0.2em] font-medium hover:bg-gray-50 transition uppercase">Check Form Writing</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Form & Signature -->
+            <div id="step3" class="step-content-view">
+                <div class="info-box p-8 md:p-10">
+                    <span class="text-[10px] font-bold text-[#7f0019] tracking-widest">STEP 03</span>
+                    <h3 class="text-lg font-medium mt-2 mb-8">申請書を書く</h3>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-sm font-medium mb-2 underline decoration-gray-200 underline-offset-4">1. 所持人自署（本人のサイン）</p>
+                            <p class="text-[11px] text-gray-500 leading-relaxed mb-4">
+                                パスポートの顔写真の下にそのまま転写されます。黒のボールペンで枠内に丁寧に書きましょう。
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm font-medium mb-2 underline decoration-gray-200 underline-offset-4">2. 法定代理人（親のサイン）</p>
+                            <p class="text-[11px] text-gray-500 leading-relaxed">
+                                申請書の裏面にあります。お父さんかお母さんに書いてもらう必要があります。当日一緒にセンターへ行かない場合は、必ず家で書いてもらってください。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showStep(4)" class="mt-12 w-full py-4 border border-gray-200 text-[10px] tracking-[0.2em] font-medium hover:bg-gray-50 transition uppercase">Go to Application</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Submission & Cost -->
+            <div id="step4" class="step-content-view">
+                <div class="info-box p-8 md:p-10">
+                    <span class="text-[10px] font-bold text-[#7f0019] tracking-widest">STEP 04</span>
+                    <h3 class="text-lg font-medium mt-2 mb-8">窓口へ行く・受け取る</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <span class="text-[#7f0019] text-xs font-bold mr-4">1.</span>
+                            <p class="text-xs text-gray-500">平日の窓口へ行き、書類を提出して「受理票（引換券）」をもらいます。</p>
+                        </div>
+                        <div class="flex">
+                            <span class="text-[#7f0019] text-xs font-bold mr-4">2.</span>
+                            <p class="text-xs text-gray-500">約1週間後、本人が受け取りに行きます。</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 p-8 border border-gray-100 bg-[#fdfdfd] text-center">
+                        <p class="text-[10px] text-gray-400 mb-2 tracking-widest">費用（12歳以上）</p>
+                        <p class="text-3xl font-light tracking-tighter">¥11,000</p>
+                        <p class="text-[9px] text-gray-300 mt-4 leading-relaxed">
+                            （収入印紙 9,000円 / 都道府県証紙 2,000円）<br>
+                            ※12歳未満は合計 6,000円です。
+                        </p>
+                    </div>
+                    
+                    <button onclick="showStep(5)" class="mt-12 w-full py-4 border border-gray-200 text-[10px] tracking-[0.2em] font-medium hover:bg-gray-50 transition uppercase">Complete Guide</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Finish -->
+            <div id="step5" class="step-content-view">
+                <div class="info-box p-12 text-center">
+                    <div class="text-4xl mb-6">✈️</div>
+                    <h3 class="text-base font-medium mb-4 tracking-widest">準備完了</h3>
+                    <p class="text-xs text-gray-400 leading-loose mb-10">
+                        これで手続きの流れは完璧です。<br>
+                        忘れ物がないかチェックして、<br>
+                        気をつけて行ってきてください。
+                    </p>
+                    <div class="pt-8 border-t border-gray-50">
+                        <p class="text-[10px] text-gray-300 tracking-widest mb-6 uppercase">Bon Voyage</p>
+                        <button onclick="showStep(0)" class="text-[10px] text-gray-400 border-b border-gray-200 pb-1 hover:text-gray-600 transition">最初に戻る</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-16 text-center">
+            <p class="text-[9px] text-gray-300 tracking-widest uppercase">© 2024 Simple Travel Guide</p>
+        </footer>
+    </div>
+
+    <script>
+        function showStep(step) {
+            // 全てのビュー（Welcome画面含む）を一旦非表示にする
+            const allViews = document.querySelectorAll('.step-content-view');
+            allViews.forEach(v => {
+                v.classList.remove('active-view');
+            });
+
+            // step 0 は Welcome 画面
+            if (step === 0) {
+                document.getElementById('welcome').classList.add('active-view');
+                updateProgress(0);
+                return;
+            }
+
+            // 指定されたステップを表示
+            const currentStep = document.getElementById('step' + step);
+            if (currentStep) {
+                currentStep.classList.add('active-view');
+                updateProgress(step);
+                // 画面を一番上にスクロール
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updateProgress(step) {
+            const progressBar = document.getElementById('progressBar');
+            const nodes = [1, 2, 3, 4, 5];
+            
+            // 進捗バーの長さを計算
+            const width = step === 0 ? 0 : ((step - 1) / (nodes.length - 1)) * 100;
+            progressBar.style.width = width + '%';
+
+            // 各ステップの丸（ノード）の状態を更新
+            nodes.forEach(n => {
+                const node = document.getElementById('node' + n);
+                if (n <= step && step !== 0) {
+                    node.classList.add('step-active');
+                } else {
+                    node.classList.remove('step-active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
